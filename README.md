@@ -1,9 +1,10 @@
 # Trip Planner
 
-Link: 
+Live version: 
 
-DESCRIPTION HERE.\
-Status: In progress
+Website presenting trips created for the user. Using map and places APIs. User choose country/city and budget for adventure and website creates trip offer with highlighted interesting places. Routes can be edited, rated and shared. Created with Django + React frameworks.
+
+Status: In progress 
 
 
 ## Table of contents
