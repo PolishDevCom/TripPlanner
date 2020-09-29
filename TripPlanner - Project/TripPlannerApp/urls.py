@@ -5,7 +5,7 @@ from TripPlannerApp import views
 
 router = DefaultRouter()
 router.register('trips', views.TripViewSet, basename="trips")
-router.register(r'users', views.UserViewSet, basename="users")
+router.register(r'registereuser', views.RegisterUserView, basename="register_user")
 
 app_name = 'TripPlannerApp'
 
