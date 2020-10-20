@@ -1,0 +1,4 @@
+dj-database-url==0.5.0
+djangorestframework==3.12.1
+Django==3.0.8
+whitenoise==5.1.0
