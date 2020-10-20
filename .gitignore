@@ -133,3 +133,7 @@ dmypy.json
 # Pyre type checker
 .pyre/
 TripPlanner - Project/secret.json
+TripPlanner - Project/secret.json
+/TripPlanner - Project/APIsApp/api_keys.json
+api_keys.json
+
