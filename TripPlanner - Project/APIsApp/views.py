@@ -1,3 +1,8 @@
-from django.shortcuts import render
+from rest_framework import viewsets
+from APIsApp.serializers import RouteSerializer
+from APIsApp.models import Route
 
-# Create your views here.
+
+class RouteViewSet(viewsets.ModelViewSet):
+    queryset = Route.objects.all()
+    serializer_class = RouteSerializer
