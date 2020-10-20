@@ -26,21 +26,22 @@ class UserSerializer(serializers.ModelSerializer):
             "username",
             "email",
             "password"
-            "password_confirm"
         ]
 
         extra_kwargs = {
             "password": {"write_only": True}
         }
 
-    def create(self):
+    def create(self, validated_data):
         user = User(username=self.validated_data['username'],
                     email=self.validated_data['email']
                     )
         password=self.validated_data['password']
-        password_confirm=self.validated_data['password_confirm']
+        # password_confirm=self.validated_data['password_confirm']
 
-        if password != password_confirm:
-            raise serializers.ValidationError({'password': 'Passwords must match.'})
+        # if password != password_confirm:
+        #     raise serializers.ValidationError({'password': 'Passwords must match.'})
         user.set_password(password)
         user.save()
+
+        return user
