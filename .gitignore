@@ -132,9 +132,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-<<<<<<< Updated upstream
-=======
+TripPlanner - Project/secret.json
 TripPlanner - Project/secret.json
 /TripPlanner - Project/APIsApp/api_keys.json
 api_keys.json
->>>>>>> Stashed changes
+
+TripPlanner - Project/APIsApp/migrations/0001_initial.py
