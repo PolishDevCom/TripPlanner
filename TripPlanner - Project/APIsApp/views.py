@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from rest_framework import viewsets
 from APIsApp.serializers import RouteSerializer
 from APIsApp.models import Route
-
+from APIsApp.forms import CoordinatesForm
 from .routeapi import RouteApiRequest
 
 
@@ -11,11 +11,22 @@ class RouteViewSet(viewsets.ModelViewSet):
     serializer_class = RouteSerializer
 
 def buttonSiteView(request):
-    distance = ""
-    coordinates = ""
+    
     if request.method == "POST":
-        route = RouteApiRequest(17.6865287,53.9324734,17.4627752,52.0239488)
-        distance = route.give_distance()
-        coordinates = route.give_coordinates()
+        form = CoordinatesForm(request.POST)
+        if form.is_valid():
 
-    return render(request, "button.html",{"coordinates":coordinates,"distance":distance})
+            longitude_start = form.cleaned_data['longitude_start']
+            latitude_start = form.cleaned_data['latitude_start']
+            longitude_end = form.cleaned_data['longitude_end']
+            latitude_end = form.cleaned_data['latitude_end']
+
+            route = RouteApiRequest(longitude_start,latitude_start,longitude_end,latitude_end)
+
+            route_model = Route(longitude_start=longitude_start,latitude_start=latitude_start,longitude_end=longitude_end,latitude_end=latitude_end,distance=route.give_distance(),coordinates_json=route.give_coordinates())
+            route_model.save()
+
+            return redirect("/api/button")
+    else:
+        form = CoordinatesForm()
+        return render(request, "button.html",{"form":form})
