@@ -28,9 +28,3 @@ class RouteApiRequest():
 
     def give_distance(self):
         return self.request_external_api()["features"][0]["properties"]["segments"][0]["distance"]
-
-
-'''
-rt = RouteApiRequest(17.6865287, 53.9324734, 17.4627752, 52.0239488)
-print(rt.give_distance())
-'''

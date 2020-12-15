@@ -9,6 +9,5 @@ router.register(r'routes', views.RouteViewSet, basename="routes")
 app_name = 'APIsApp'
 
 urlpatterns = [
-    path('', include(router.urls)),
-    path('button', views.buttonSiteView, name='buttonSiteView')
+    path('', include(router.urls))
 ]
