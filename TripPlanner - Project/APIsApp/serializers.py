@@ -23,27 +23,29 @@ class RouteSerializer(serializers.ModelSerializer):
         }
 
     def create(self, validated_data):
-        api_request = RouteApiRequest(
-            self.validated_data["longitude_start"],
-            self.validated_data["latitude_start"],
-            self.validated_data["longitude_end"],
-            self.validated_data["latitude_end"]
-        )
 
-        if api_request.reply_valid:
-            route = Route(
-                longitude_start=self.validated_data["longitude_start"],
-                latitude_start=self.validated_data["latitude_start"],
-                longitude_end=self.validated_data["longitude_end"],
-                latitude_end=self.validated_data["latitude_end"],
-                distance=RouteApiRequest.give_distance(
-                    api_request.reply, api_request.reply_valid),
-                coordinates_json=RouteApiRequest.give_coordinates(
-                    api_request.reply, api_request.reply_valid),
+        if self.is_valid():
+            api_request = RouteApiRequest(
+                self.validated_data["longitude_start"],
+                self.validated_data["latitude_start"],
+                self.validated_data["longitude_end"],
+                self.validated_data["latitude_end"]
             )
 
-            route.save()
-            return route
+            if api_request.reply_valid:
+                route = Route(
+                    longitude_start=self.validated_data["longitude_start"],
+                    latitude_start=self.validated_data["latitude_start"],
+                    longitude_end=self.validated_data["longitude_end"],
+                    latitude_end=self.validated_data["latitude_end"],
+                    distance=RouteApiRequest.give_distance(
+                        api_request.reply, api_request.reply_valid),
+                    coordinates_json=RouteApiRequest.give_coordinates(
+                        api_request.reply, api_request.reply_valid),
+                )
 
-        else:
-            return False
+                route.save()
+                return route
+
+            else:
+                return False

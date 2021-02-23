@@ -26,12 +26,12 @@ class RouteApiRequest():
         if self.api_key_valid:
             base_url = "https://api.openrouteservice.org/v2/directions/driving-car?api_key="
             url = f"{base_url}{self.api_key}&start={str(self.longitude_start)},{str(self.latitude_start)}&end={str(self.longitude_end)},{str(self.latitude_end)}"
-            return json.loads(requests.get(url))
+            return json.loads(requests.get(url).text)
         else:
-            return False
+            return {"error": True}
 
     def is_reply_success(self):
-        if "error" in self.reply or self.reply == False or bool(self.api_key):
+        if "error" in self.reply or self.api_key_valid == False:
             return False
         else:
             return True
