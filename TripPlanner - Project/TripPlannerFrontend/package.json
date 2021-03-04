@@ -7,7 +7,9 @@
     "serve": "vite preview",
     "type-check": "tsc --pretty --noEmit",
     "format": "prettier --write *.{ts,tsx,html}",
-    "lint": "eslint . --ext ts --ext tsx --ext js"
+    "format:fix": "yarn format --write",
+    "lint": "eslint . --ext ts --ext tsx --ext js",
+    "lint:fix": "yarn lint --fix"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.5.0",
