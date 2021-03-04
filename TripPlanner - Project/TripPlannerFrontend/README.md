@@ -51,10 +51,18 @@ yarn dev
 
 ### Building
 
-Running the `build` task will create a production-ready version of website.
+Running the `build` task will create a production-ready version of the app.
 
 ```sh
 yarn build
+```
+
+#### Serving the build
+
+Running the `serve` task will serve built app.
+
+```sh
+yarn serve
 ```
 
 ### Linting, formatting
