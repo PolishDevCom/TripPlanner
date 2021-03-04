@@ -11,6 +11,14 @@ These instructions will get you a copy of the project up and running on your loc
 - [Node.js](https://nodejs.org/en/) - latest LTS or current version
 - [yarn](https://classic.yarnpkg.com/en/docs/install/) - latest version
 
+#### Node.js version
+
+In [prerequisites](#prerequisites) there's a statement recommending
+
+> latest LTS or current version of node.js
+
+If for whatever reason your development environment is acting strange (dev server not starting, something's off, etc.), please ensure you're using the version of node.js specified in [.nvmrc](.nvmrc). If you have [nvm](https://github.com/nvm-sh/nvm) installed, all you have to do is to run `nvm use` while in `TripPlanner - Project/TripPlannerFrontend`. `nvm use` will install and use version of node.js specified in `.nvmrc`.
+
 ### Installing
 
 1. Clone the repo:
