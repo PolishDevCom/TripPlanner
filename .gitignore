@@ -137,3 +137,6 @@ TripPlanner - Project/secret.json
 api_keys.json
 
 TripPlanner - Project/APIsApp/migrations/0001_initial.py
+
+# macOS weird stuff
+.DS_Store
