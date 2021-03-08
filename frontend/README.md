@@ -30,7 +30,7 @@ git clone git@github.com:UgzSourceCode/TripPlanner.git
 2. Go to TripPlannerFrontend:
 
 ```sh
-cd TripPlanner\ -\ Project/TripPlannerFrontend
+cd TripPlanner/frontend
 ```
 
 3. Install dependencies:
@@ -43,7 +43,7 @@ tl;dr
 
 ```sh
 git clone git@github.com:UgzSourceCode/TripPlanner.git &&\
-cd TripPlanner/TripPlanner\ -\ Project/TripPlannerFrontend &&\
+cd TripPlanner/frontend &&\
 yarn
 ```
 

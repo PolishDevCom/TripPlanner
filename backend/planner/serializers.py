@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from TripPlannerApp.models import Trip
+from planner.models import Trip
 
 
 class TripSerializer(serializers.ModelSerializer):

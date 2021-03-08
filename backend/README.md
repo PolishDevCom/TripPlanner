@@ -59,6 +59,7 @@ DATABASES = {
 
 Migrate and create superuser
 ```
+(project-venv) $ cd backend
 (project-venv) $ python manage.py makemigrations
 (project-venv) $ python manage.py migrate
 (project-venv) $ python manage.py createsuperuser
