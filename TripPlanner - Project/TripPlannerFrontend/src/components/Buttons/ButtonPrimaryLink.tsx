@@ -11,7 +11,12 @@ const ButtonLink = styled.button`
   cursor: pointer;
   left: calc(50% - 105px/2);
   top: calc(50% - 34px/2 + 54px);
-
+  font-family: Work Sans, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+  
   &:hover {
     color: #F75D45;
   }
