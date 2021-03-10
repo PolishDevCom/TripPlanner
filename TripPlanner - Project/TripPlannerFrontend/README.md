@@ -1,5 +1,7 @@
 ![](public/og.png 'Title')
 
+[![](public/powered-by-vercel.svg 'Powered by Vercel')](https://vercel.com/?utm_source=PolishDev_TripPlanner&utm_campaign=oss)
+
 # TripPlanner Frontend
 
 ## Getting Started
