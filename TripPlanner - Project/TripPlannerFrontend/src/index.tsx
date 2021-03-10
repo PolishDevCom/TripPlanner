@@ -24,6 +24,7 @@ Layout.configure({
 import { GlobalStyle } from './GlobalStyle';
 import { store } from './store';
 import { routes } from './routes';
+import { Footer } from './components/Footer/Footer';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -37,6 +38,8 @@ ReactDOM.render(
           ))}
         </Switch>
       </Router>
+
+      <Footer />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
