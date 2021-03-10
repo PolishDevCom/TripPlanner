@@ -8,6 +8,9 @@ import {
 import { useInterval } from '../hooks/useInterval';
 import { DefaultLayout } from '../components/Layout/DefaultLayout';
 import { Typography } from '../components/Typography/Typography';
+import ButtonPrimary from '../components/Buttons/ButtonPrimary';
+import ButtonText from '../components/Buttons/ButtonPrimaryText';
+import ButtonLink from '../components/Buttons/ButtonPrimaryLink';
 
 export const Home = () => {
   const dispatch = useAppDispatch();
@@ -20,9 +23,11 @@ export const Home = () => {
   }, 1000);
 
   return (
-    <DefaultLayout gapRow={3} marginVertical={5} marginHorizontal="auto">
+    <DefaultLayout gapRow={3} marginHorizontal="auto">
       <Typography.Heading as="h1">Hi, what's up?</Typography.Heading>
-
+      <ButtonPrimary>CONTENT</ButtonPrimary>
+      <ButtonText>CONTENT</ButtonText>
+      <ButtonLink>CONTENT</ButtonLink>
       <Typography.Subheading as="h2">
         I know you've been here for {distanceBetweenDateAndSecondsEllapsed}, but
         for God's sake - write&nbsp;some&nbsp;code!

@@ -6,7 +6,11 @@ interface DefaultLayoutProps extends React.ComponentProps<typeof Composition> {
 }
 
 export const DefaultLayout = ({ children, ...props }: DefaultLayoutProps) => (
-  <Composition maxWidth="640px" paddingHorizontalTabletDown={1} {...props}>
+  <Composition 
+    width='100%'
+    paddingHorizontalTabletDown={1} 
+    {...props}
+    >
     {children}
   </Composition>
 );
