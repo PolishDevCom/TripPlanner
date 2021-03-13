@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from APIsApp.models import Route
+from api.models import Route
 
 
 class RouteSerializer(serializers.ModelSerializer):

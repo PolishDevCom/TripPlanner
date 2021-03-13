@@ -2,8 +2,8 @@ from rest_framework import viewsets
 
 from django.contrib.auth.models import User
 
-from TripPlannerApp.serializers import TripSerializer, UserSerializer
-from TripPlannerApp.models import Trip
+from planner.serializers import TripSerializer, UserSerializer
+from planner.models import Trip
 
 
 
