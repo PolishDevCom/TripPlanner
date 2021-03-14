@@ -1,6 +1,7 @@
 from rest_framework import serializers
-from .models import Route
-from .routeapi import RouteApiRequest
+from django.contrib.auth.models import User
+from api.models import Route
+from api.routeapi import RouteApiRequest
 
 
 class RouteSerializer(serializers.ModelSerializer):
@@ -49,3 +50,4 @@ class RouteSerializer(serializers.ModelSerializer):
 
             else:
                 return False
+
