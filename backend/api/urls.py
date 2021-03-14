@@ -4,11 +4,11 @@ from api import views
 
 
 router = DefaultRouter()
-router.register(r'routes', views.RouteViewSet, basename="routes")
+router.register(r"routes", views.RouteViewSet, basename="routes")
 
 
-app_name = 'api'
+app_name = "api"
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path("", include(router.urls)),
 ]

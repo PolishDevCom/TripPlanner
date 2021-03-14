@@ -2,7 +2,7 @@ import json
 import requests
 
 
-class RouteApiRequest():
+class RouteApiRequest:
     def __init__(self, longitude_start, latitude_start, longitude_end, latitude_end):
         self.longitude_start = longitude_start
         self.latitude_start = latitude_start
@@ -16,7 +16,7 @@ class RouteApiRequest():
 
     def make_url(self):
         base_url = "https://api.openrouteservice.org/v2/directions/driving-car?api_key="
-        return(f"{base_url}{self.api_key}&start={str(self.longitude_start)},{str(self.latitude_start)}&end={str(self.longitude_end)},{str(self.latitude_end)}")
+        return f"{base_url}{self.api_key}&start={str(self.longitude_start)},{str(self.latitude_start)}&end={str(self.longitude_end)},{str(self.latitude_end)}"
 
     def request_external_api(self):
         r = requests.get(self.make_url())
@@ -27,10 +27,12 @@ class RouteApiRequest():
         return self.request_external_api()["features"][0]["geometry"]["coordinates"]
 
     def give_distance(self):
-        return self.request_external_api()["features"][0]["properties"]["segments"][0]["distance"]
+        return self.request_external_api()["features"][0]["properties"]["segments"][0][
+            "distance"
+        ]
 
 
-'''
+"""
 rt = RouteApiRequest(17.6865287, 53.9324734, 17.4627752, 52.0239488)
 print(rt.give_distance())
-'''
+"""

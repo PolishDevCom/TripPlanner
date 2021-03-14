@@ -16,6 +16,4 @@ class RouteSerializer(serializers.ModelSerializer):
             "coordinates_json",
             "created_at",
         ]
-        extra_kwargs = {
-            "created_at": {"read_only": True}
-        }
+        extra_kwargs = {"created_at": {"read_only": True}}
