@@ -1,5 +1,5 @@
 from django.contrib import admin
-from TripPlannerApp.models import Trip
+from planner.models import Trip
 
 
 admin.site.register(Trip)
