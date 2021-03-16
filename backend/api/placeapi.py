@@ -1,4 +1,5 @@
 import json
+
 import requests
 
 
@@ -42,25 +43,27 @@ class PlacesApiRequest:
         venues_list = []
         for i in range(self.limit):
             item = {
-                "name": self.response["response"]["groups"][0]["items"][i]["venue"][
-                    "name"
-                ],
-                "categories": self.response["response"]["groups"][0]["items"][i][
+                "name": self.response["response"]["groups"][0]["items"][i][
                     "venue"
-                ]["categories"][0]["name"],
-                "address": self.response["response"]["groups"][0]["items"][i]["venue"][
-                    "location"
-                ]["formattedAddress"],
-                "lattitude": self.response["response"]["groups"][0]["items"][i][
+                ]["name"],
+                "categories": self.response["response"]["groups"][0]["items"][
+                    i
+                ]["venue"]["categories"][0]["name"],
+                "address": self.response["response"]["groups"][0]["items"][i][
                     "venue"
-                ]["location"]["lat"],
-                "longitude": self.response["response"]["groups"][0]["items"][i][
+                ]["location"]["formattedAddress"],
+                "lattitude": self.response["response"]["groups"][0]["items"][
+                    i
+                ]["venue"]["location"]["lat"],
+                "longitude": self.response["response"]["groups"][0]["items"][
+                    i
+                ]["venue"]["location"]["lng"],
+                "distance": self.response["response"]["groups"][0]["items"][i][
                     "venue"
-                ]["location"]["lng"],
-                "distance": self.response["response"]["groups"][0]["items"][i]["venue"][
-                    "location"
-                ]["distance"],
-                "id": self.response["response"]["groups"][0]["items"][i]["venue"]["id"],
+                ]["location"]["distance"],
+                "id": self.response["response"]["groups"][0]["items"][i][
+                    "venue"
+                ]["id"],
             }
             venues_list.append(item)
         return venues_list
@@ -83,12 +86,17 @@ class VenueApiRequest:
             return json.loads(secret.read()).get("SECRET_KEY_PLACES")
 
     def venue_request(self, venue_id):
-        url = f"https://api.foursquare.com/v2/venues/{venue_id}?client_id={self.api_key}&client_secret={self.secret}&v=20210303"
+        url = (
+            f"https://api.foursquare.com/v2/venues/{venue_id}?"
+            f"client_id={self.api_key}&client_secret={self.secret}&v=20210303"
+        )
         resp = requests.get(url=url)
         return json.loads(resp.text)
 
     def get_venue_details(self):
-        categories_length = len(self.response["response"]["venue"]["categories"])
+        categories_length = len(
+            self.response["response"]["venue"]["categories"]
+        )
         venue_categories = []
         for i in range(categories_length):
             venue_categories.append(
@@ -108,12 +116,17 @@ class VenueApiRequest:
                 + "original"
                 + self.response["response"]["venue"]["bestPhoto"]["suffix"]
             ),
-            "attributes": self.response["response"]["venue"]["attributes"]["groups"],
+            "attributes": self.response["response"]["venue"]["attributes"][
+                "groups"
+            ],
         }
         return details
 
     def get_similar_venues(self, venue_id):
-        url = f"https://api.foursquare.com/v2/venues/{venue_id}/similar?client_id={self.api_key}&client_secret={self.secret}&v=20210303"
+        url = (
+            f"https://api.foursquare.com/v2/venues/{venue_id}/similar?"
+            f"client_id={self.api_key}&client_secret={self.secret}&v=20210303"
+        )
         resp = requests.get(url=url)
         data = json.loads(resp.text)
         count = data["response"]["similarVenues"]["count"]
@@ -121,18 +134,18 @@ class VenueApiRequest:
         for i in range(count):
             similar_venue_details = {
                 "name": data["response"]["similarVenues"]["items"][i]["name"],
-                "address": data["response"]["similarVenues"]["items"][i]["location"][
-                    "formattedAddress"
-                ],
-                "lattitude": data["response"]["similarVenues"]["items"][i]["location"][
-                    "lat"
-                ],
-                "longtitude": data["response"]["similarVenues"]["items"][i]["location"][
-                    "lng"
-                ],
-                "category": data["response"]["similarVenues"]["items"][i]["categories"][
-                    0
-                ]["name"],
+                "address": data["response"]["similarVenues"]["items"][i][
+                    "location"
+                ]["formattedAddress"],
+                "lattitude": data["response"]["similarVenues"]["items"][i][
+                    "location"
+                ]["lat"],
+                "longtitude": data["response"]["similarVenues"]["items"][i][
+                    "location"
+                ]["lng"],
+                "category": data["response"]["similarVenues"]["items"][i][
+                    "categories"
+                ][0]["name"],
             }
             similar_venues.append(similar_venue_details)
         return similar_venues
