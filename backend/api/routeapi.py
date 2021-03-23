@@ -8,29 +8,44 @@ class RouteApiRequest():
         self.latitude_start = latitude_start
         self.longitude_end = longitude_end
         self.latitude_end = latitude_end
+
         self.api_key = self.obtain_api_key()
+        self.api_key_valid = bool(self.api_key)
+
+        self.reply = self.request_external_api()
+        self.reply_valid = self.is_reply_success()
 
     def obtain_api_key(self):
-        with open("api_keys.json") as api_keys:
-            return json.loads(api_keys.read()).get("ROUTE_API_KEY")
-
-    def make_url(self):
-        base_url = "https://api.openrouteservice.org/v2/directions/driving-car?api_key="
-        return(f"{base_url}{self.api_key}&start={str(self.longitude_start)},{str(self.latitude_start)}&end={str(self.longitude_end)},{str(self.latitude_end)}")
+        try:
+            with open("api_keys.json") as api_keys:
+                return json.loads(api_keys.read()).get("ROUTE_API_KEY")
+        except:
+            return False
 
     def request_external_api(self):
-        r = requests.get(self.make_url())
-        page_source = r.text
-        return json.loads(page_source)
+        if self.api_key_valid:
+            base_url = "https://api.openrouteservice.org/v2/directions/driving-car?api_key="
+            url = f"{base_url}{self.api_key}&start={str(self.longitude_start)},{str(self.latitude_start)}&end={str(self.longitude_end)},{str(self.latitude_end)}"
+            return json.loads(requests.get(url).text)
+        else:
+            return {"error": True}
 
-    def give_coordinates(self):
-        return self.request_external_api()["features"][0]["geometry"]["coordinates"]
+    def is_reply_success(self):
+        if "error" in self.reply or self.api_key_valid == False:
+            return False
+        else:
+            return True
 
-    def give_distance(self):
-        return self.request_external_api()["features"][0]["properties"]["segments"][0]["distance"]
+    @staticmethod
+    def get_coordinates(reply, reply_valid):
+        if reply_valid:
+            return reply["features"][0]["geometry"]["coordinates"]
+        else:
+            return False
 
-
-'''
-rt = RouteApiRequest(17.6865287, 53.9324734, 17.4627752, 52.0239488)
-print(rt.give_distance())
-'''
+    @staticmethod
+    def get_distance(reply, reply_valid):
+        if reply_valid:
+            return reply["features"][0]["properties"]["segments"][0]["distance"]
+        else:
+            return False
