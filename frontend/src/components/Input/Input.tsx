@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   StyledInput,
   StyledInputWrapper,
@@ -14,39 +14,38 @@ interface Props {
   errorMessage: string;
 }
 
-const Input: React.FC<Props> = ({
+const Input = ({
   disabled,
   label,
   withError,
   placeholder,
   errorMessage,
-}) => {
-
-const [inputValue, setInputValue] = useState('')
-const handleInputChange = (e: { target: { value: string; } }) => {
-  setInputValue(e.target.value)
-}
+}: Props) => {
+  const [inputValue, setInputValue] = useState<string>('');
+  const handleInputChange = (e: { target: { value: string } }) => {
+    setInputValue(e.target.value);
+  };
 
   return (
     <StyledInputWrapper>
-    <StyledLabel
-      disabled={disabled}
-      htmlFor={placeholder}
-      withError={withError}
+      <StyledLabel
+        disabled={disabled}
+        htmlFor={placeholder}
+        withError={withError}
       >
-      {label}
-    </StyledLabel>
-    <StyledInput
-      placeholder={placeholder}
-      id={placeholder}
-      disabled={disabled}
-      withError={withError}
-      value={inputValue}
-      onChange={handleInputChange}
+        {label}
+      </StyledLabel>
+      <StyledInput
+        placeholder={placeholder}
+        id={placeholder}
+        disabled={disabled}
+        withError={withError}
+        value={inputValue}
+        onChange={handleInputChange}
       />
-    {withError && <StyledErrorMessage>{errorMessage}</StyledErrorMessage>}
-  </StyledInputWrapper>
+      {withError && <StyledErrorMessage>{errorMessage}</StyledErrorMessage>}
+    </StyledInputWrapper>
   );
-}
+};
 
 export default Input;
