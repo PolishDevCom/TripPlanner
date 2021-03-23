@@ -1,7 +1,7 @@
-from rest_framework import serializers
-from django.contrib.auth.models import User
 from api.models import Route
 from api.routeapi import RouteApiRequest
+from django.contrib.auth.models import User
+from rest_framework import serializers
 
 
 class RouteSerializer(serializers.ModelSerializer):
@@ -20,7 +20,7 @@ class RouteSerializer(serializers.ModelSerializer):
         extra_kwargs = {
             "created_at": {"read_only": True},
             "coordinates_json": {"read_only": True},
-            "distance": {"read_only": True}
+            "distance": {"read_only": True},
         }
 
     def create(self, validated_data):
@@ -30,7 +30,7 @@ class RouteSerializer(serializers.ModelSerializer):
                 self.validated_data["longitude_start"],
                 self.validated_data["latitude_start"],
                 self.validated_data["longitude_end"],
-                self.validated_data["latitude_end"]
+                self.validated_data["latitude_end"],
             )
 
             if api_request.reply_valid:
@@ -40,9 +40,11 @@ class RouteSerializer(serializers.ModelSerializer):
                     longitude_end=self.validated_data["longitude_end"],
                     latitude_end=self.validated_data["latitude_end"],
                     distance=RouteApiRequest.give_distance(
-                        api_request.reply, api_request.reply_valid),
+                        api_request.reply, api_request.reply_valid
+                    ),
                     coordinates_json=RouteApiRequest.give_coordinates(
-                        api_request.reply, api_request.reply_valid),
+                        api_request.reply, api_request.reply_valid
+                    ),
                 )
 
                 route.save()
@@ -50,4 +52,3 @@ class RouteSerializer(serializers.ModelSerializer):
 
             else:
                 return False
-

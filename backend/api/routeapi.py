@@ -1,9 +1,12 @@
 import json
+
 import requests
 
 
-class RouteApiRequest():
-    def __init__(self, longitude_start, latitude_start, longitude_end, latitude_end):
+class RouteApiRequest:
+    def __init__(
+        self, longitude_start, latitude_start, longitude_end, latitude_end
+    ):
         self.longitude_start = longitude_start
         self.latitude_start = latitude_start
         self.longitude_end = longitude_end
@@ -46,6 +49,8 @@ class RouteApiRequest():
     @staticmethod
     def get_distance(reply, reply_valid):
         if reply_valid:
-            return reply["features"][0]["properties"]["segments"][0]["distance"]
+            return reply["features"][0]["properties"]["segments"][0][
+                "distance"
+            ]
         else:
             return False
