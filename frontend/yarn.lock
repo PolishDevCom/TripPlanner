@@ -1346,6 +1346,11 @@ colorette@^1.2.1, colorette@^1.2.2:
   resolved "https://registry.yarnpkg.com/colorette/-/colorette-1.2.2.tgz#cbcc79d5e99caea2dbf10eb3a26fd8b3e6acfa94"
   integrity sha512-MKGMzyfeuutC/ZJ1cba9NqcNpfeqMUcYmyF1ZFY6/Cn7CNSAKx6a+s48sqLqyAiZuaP2TcqMhoo+dlwFnVxT9w==
 
+colors@~0.6.0-1:
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/colors/-/colors-0.6.2.tgz#2423fe6678ac0c5dae8852e5d0e5be08c997abcc"
+  integrity sha1-JCP+ZnisDF2uiFLl0OW+CMmXq8w=
+
 command-line-args@^5.1.1:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/command-line-args/-/command-line-args-5.1.1.tgz#88e793e5bb3ceb30754a86863f0401ac92fd369a"
@@ -1365,6 +1370,18 @@ command-line-usage@^6.1.1:
     chalk "^2.4.2"
     table-layout "^1.0.1"
     typical "^5.2.0"
+
+commander@2.9.0:
+  version "2.9.0"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-2.9.0.tgz#9c99094176e12240cb22d6c5146098400fe0f7d4"
+  integrity sha1-nJkJQXbhIkDLItbFFGCYQA/g99Q=
+  dependencies:
+    graceful-readlink ">= 1.0.0"
+
+commander@~2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-2.1.0.tgz#d121bbae860d9992a3d517ba96f56588e47c6781"
+  integrity sha1-0SG7roYNmZKj1Re6lvVliOR8Z4E=
 
 concat-map@0.0.1:
   version "0.0.1"
@@ -1974,6 +1991,14 @@ find-up@^4.0.0:
     locate-path "^5.0.0"
     path-exists "^4.0.0"
 
+findup@0.1.5:
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/findup/-/findup-0.1.5.tgz#8ad929a3393bac627957a7e5de4623b06b0e2ceb"
+  integrity sha1-itkpozk7rGJ5V6fl3kYjsGsOLOs=
+  dependencies:
+    colors "~0.6.0-1"
+    commander "~2.1.0"
+
 flat-cache@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/flat-cache/-/flat-cache-3.0.4.tgz#61b0338302b2fe9f957dcc32fc2a87f1c3048b11"
@@ -2048,6 +2073,18 @@ get-stream@^6.0.0:
   resolved "https://registry.yarnpkg.com/get-stream/-/get-stream-6.0.0.tgz#3e0012cb6827319da2706e601a1583e8629a6718"
   integrity sha512-A1B3Bh1UmL0bidM/YX2NsCOTnGJePL9rO/M+Mw3m9f2gUpfokS0hi5Eah0WSUEWZdZhIZtMjkIYS7mDfOqNHbg==
 
+ghooks@^2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/ghooks/-/ghooks-2.0.4.tgz#fd50e040ff548906ae42cb51793a01bfe24567b9"
+  integrity sha1-/VDgQP9UiQauQstReToBv+JFZ7k=
+  dependencies:
+    findup "0.1.5"
+    lodash.clone "4.5.0"
+    manage-path "2.0.0"
+    opt-cli "1.5.1"
+    path-exists "3.0.0"
+    spawn-command "0.0.2"
+
 glob-parent@^5.0.0, glob-parent@^5.1.0, glob-parent@~5.1.0:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/glob-parent/-/glob-parent-5.1.1.tgz#b6c1ef417c4e5663ea498f1c45afac6916bbc229"
@@ -2095,6 +2132,11 @@ graceful-fs@^4.1.2:
   version "4.2.6"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.6.tgz#ff040b2b0853b23c3d31027523706f1885d76bee"
   integrity sha512-nTnJ528pbqxYanhpDYsi4Rd8MAeaBA67+RZ10CM1m3bTAVFEDcd5AuA4a6W5YkGZ1iNXHzZz8T6TBKLeBuNriQ==
+
+"graceful-readlink@>= 1.0.0":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/graceful-readlink/-/graceful-readlink-1.0.1.tgz#4cafad76bc62f02fa039b2f94e9a3dd3a391a725"
+  integrity sha1-TK+tdrxi8C+gObL5Tpo906ORpyU=
 
 has-bigints@^1.0.0:
   version "1.0.1"
@@ -2615,10 +2657,27 @@ locate-path@^5.0.0:
   dependencies:
     p-locate "^4.1.0"
 
+lodash._baseclone@~4.5.0:
+  version "4.5.7"
+  resolved "https://registry.yarnpkg.com/lodash._baseclone/-/lodash._baseclone-4.5.7.tgz#ce42ade08384ef5d62fa77c30f61a46e686f8434"
+  integrity sha1-zkKt4IOE711i+nfDD2GkbmhvhDQ=
+
 lodash.camelcase@^4.3.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/lodash.camelcase/-/lodash.camelcase-4.3.0.tgz#b28aa6288a2b9fc651035c7711f65ab6190331a6"
   integrity sha1-soqmKIorn8ZRA1x3EfZathkDMaY=
+
+lodash.clone@4.3.2:
+  version "4.3.2"
+  resolved "https://registry.yarnpkg.com/lodash.clone/-/lodash.clone-4.3.2.tgz#e56b176b6823a7dde38f7f2bf58de7d5971200e9"
+  integrity sha1-5WsXa2gjp93jj38r9Y3n1ZcSAOk=
+  dependencies:
+    lodash._baseclone "~4.5.0"
+
+lodash.clone@4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/lodash.clone/-/lodash.clone-4.5.0.tgz#195870450f5a13192478df4bc3d23d2dea1907b6"
+  integrity sha1-GVhwRQ9aExkkeN9Lw9I9LeoZB7Y=
 
 lodash.sortby@^4.7.0:
   version "4.7.0"
@@ -2673,6 +2732,11 @@ make-dir@^3.0.0:
   integrity sha512-g3FeP20LNwhALb/6Cz6Dd4F2ngze0jz7tbzrD2wAV+o9FeNHe4rL+yK2md0J/fiSf1sa1ADhXqi5+oVwOM/eGw==
   dependencies:
     semver "^6.0.0"
+
+manage-path@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/manage-path/-/manage-path-2.0.0.tgz#f4cf8457b926eeee2a83b173501414bc76eb9597"
+  integrity sha1-9M+EV7km7u4qg7FzUBQUvHbrlZc=
 
 marky@^1.2.0:
   version "1.2.1"
@@ -2890,6 +2954,16 @@ open@^7.3.0:
     is-docker "^2.0.0"
     is-wsl "^2.1.1"
 
+opt-cli@1.5.1:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/opt-cli/-/opt-cli-1.5.1.tgz#04db447b13c96b992eb31685266f4ed0d9736dc2"
+  integrity sha1-BNtEexPJa5kusxaFJm9O0NlzbcI=
+  dependencies:
+    commander "2.9.0"
+    lodash.clone "4.3.2"
+    manage-path "2.0.0"
+    spawn-command "0.0.2-1"
+
 optionator@^0.9.1:
   version "0.9.1"
   resolved "https://registry.yarnpkg.com/optionator/-/optionator-0.9.1.tgz#4f236a6373dae0566a6d43e1326674f50c291499"
@@ -2969,7 +3043,7 @@ parseurl@^1.3.2:
   resolved "https://registry.yarnpkg.com/parseurl/-/parseurl-1.3.3.tgz#9da19e7bee8d12dff0513ed5b76957793bc2e8d4"
   integrity sha512-CiyeOxFT/JZyN5m0z9PfXw4SCBJ6Sygz1Dpl0wqjlhDEGGBP1GnsUVEL0p63hoG1fcj3fHynXi9NYO4nWOL+qQ==
 
-path-exists@^3.0.0:
+path-exists@3.0.0, path-exists@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/path-exists/-/path-exists-3.0.0.tgz#ce0ebeaa5f78cb18925ea7d810d7b59b010fd515"
   integrity sha1-zg6+ql94yxiSXqfYENe1mwEP1RU=
@@ -3529,6 +3603,16 @@ source-map@^0.7.3:
   version "0.7.3"
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.7.3.tgz#5302f8169031735226544092e64981f751750383"
   integrity sha512-CkCj6giN3S+n9qrYiBTX5gystlENnRW5jZeNLHpe6aue+SrHcG5VYwujhW9s4dY31mEGsxBDrHR6oI69fTXsaQ==
+
+spawn-command@0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/spawn-command/-/spawn-command-0.0.2.tgz#9544e1a43ca045f8531aac1a48cb29bdae62338e"
+  integrity sha1-lUThpDygRfhTGqwaSMspva5iM44=
+
+spawn-command@0.0.2-1:
+  version "0.0.2-1"
+  resolved "https://registry.yarnpkg.com/spawn-command/-/spawn-command-0.0.2-1.tgz#62f5e9466981c1b796dc5929937e11c9c6921bd0"
+  integrity sha1-YvXpRmmBwbeW3Fkpk34RycaSG9A=
 
 spawn-sync@^1.0.15:
   version "1.0.15"

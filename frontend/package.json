@@ -7,10 +7,17 @@
     "build": "tsc && vite build",
     "serve": "vite preview",
     "type-check": "tsc --pretty --noEmit",
-    "format": "prettier --write *.{ts,tsx,html}",
+    "format": "prettier --write **/*.{ts,tsx,html}",
     "format:fix": "yarn format --write",
-    "lint": "eslint . --ext ts --ext tsx --ext js",
+    "lint": "eslint . --ext ts --ext tsx",
     "lint:fix": "yarn lint --fix"
+  },
+  "config": {
+    "ghooks": {
+      "pre-commit": "cd frontend && yarn format:fix && yarn type-check && yarn lint:fix",
+      "post-merge": "yarn install",
+      "post-rewrite": "yarn install"
+    }
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.5.0",
@@ -43,6 +50,7 @@
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "ghooks": "^2.0.4",
     "pre-commit": "^1.2.2",
     "prettier": "^2.0.5",
     "typescript": "^4.1.2",
