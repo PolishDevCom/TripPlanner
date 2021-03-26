@@ -1,14 +1,15 @@
-from django.urls import path, include
-from rest_framework.routers import DefaultRouter
+from django.urls import include, path
 from planner import views
-
+from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
-router.register('trips', views.TripViewSet, basename="trips")
-router.register(r'registeruser', views.RegisterUserView, basename="register_user")
+router.register("trips", views.TripViewSet, basename="trips")
+router.register(
+    r"registeruser", views.RegisterUserView, basename="register_user"
+)
 
-app_name = 'planner'
+app_name = "planner"
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path("", include(router.urls)),
 ]
