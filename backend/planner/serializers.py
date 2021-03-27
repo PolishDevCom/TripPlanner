@@ -1,6 +1,6 @@
-from rest_framework import serializers
 from django.contrib.auth.models import User
 from planner.models import Trip
+from rest_framework import serializers
 
 
 class TripSerializer(serializers.ModelSerializer):
@@ -13,30 +13,22 @@ class TripSerializer(serializers.ModelSerializer):
             "no_of_days",
             "created_at",
         ]
-        extra_kwargs = {
-            "created_at": {"read_only": True}
-        }
+        extra_kwargs = {"created_at": {"read_only": True}}
 
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = [
-            "id",
-            "username",
-            "email",
-            "password"
-        ]
+        fields = ["id", "username", "email", "password"]
 
-        extra_kwargs = {
-            "password": {"write_only": True}
-        }
+        extra_kwargs = {"password": {"write_only": True}}
 
     def create(self, validated_data):
-        user = User(username=self.validated_data['username'],
-                    email=self.validated_data['email']
-                    )
-        password=self.validated_data['password']
+        user = User(
+            username=self.validated_data["username"],
+            email=self.validated_data["email"],
+        )
+        password = self.validated_data["password"]
         # password_confirm=self.validated_data['password_confirm']
 
         # if password != password_confirm:

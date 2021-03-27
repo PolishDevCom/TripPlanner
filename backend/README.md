@@ -57,12 +57,27 @@ DATABASES = {
 }
 ```
 
-Migrate and create superuser
+Create and run an isolated environment
 ```
-(project-venv) $ cd backend
-(project-venv) $ python manage.py makemigrations
-(project-venv) $ python manage.py migrate
-(project-venv) $ python manage.py createsuperuser
+$ python -m venv project-venv
+$ source project-venv/bin/activate
 ```
 
+Install the dependencies:
+```
+(project-venv)$ pip install -r requirements.txt
+```
+
+Migrate and create superuser
+```
+(project-venv)$ cd backend
+(project-venv)$ python manage.py makemigrations
+(project-venv)$ python manage.py migrate
+(project-venv)$ python manage.py createsuperuser
+```
+
+Run the server
+```
+(project-venv)$ python manage.py runserver
+```
 ## Contact

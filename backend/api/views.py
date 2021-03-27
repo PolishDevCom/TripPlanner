@@ -1,6 +1,6 @@
-from rest_framework import viewsets
-from api.serializers import RouteSerializer
 from api.models import Route
+from api.serializers import RouteSerializer
+from rest_framework import viewsets
 
 
 class RouteViewSet(viewsets.ModelViewSet):
