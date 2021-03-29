@@ -146,7 +146,7 @@ class VenueApiRequest:
 
 # from api.placeapi import PlacesApiRequest
 # from api.placeapi import VenueApiRequest
-# places = PlacesApiRequest(52.2297700,21.0117800,500,5,"food")
+# places = MockPlacesApiRequest(52.2297700,21.0117800,500,5,"food")
 # print(places.venues_list)
 # venue = VenueApiRequest("5141be20e4b0d830a88733f4")
 # print(venue.details)
