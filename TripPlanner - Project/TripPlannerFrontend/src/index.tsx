@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import Layout from 'atomic-layout';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Header } from '../src/components/Layout/Header';
 
 Layout.configure({
   defaultUnit: 'rem',
@@ -28,7 +29,7 @@ import { routes } from './routes';
 ReactDOM.render(
   <React.StrictMode>
     <GlobalStyle />
-
+    <Header />
     <Provider store={store}>
       <Router>
         <Switch>

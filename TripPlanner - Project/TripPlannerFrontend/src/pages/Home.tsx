@@ -8,7 +8,6 @@ import {
 import { useInterval } from '../hooks/useInterval';
 import { DefaultLayout } from '../components/Layout/DefaultLayout';
 import { Typography } from '../components/Typography/Typography';
-import Header from '../components/Layout/Header';
 
 export const Home = () => {
   const dispatch = useAppDispatch();
@@ -22,7 +21,6 @@ export const Home = () => {
 
   return (
     <DefaultLayout gapRow={3} marginHorizontal="auto">
-      <Header />
       <Typography.Heading as="h1">Hi, what's up?</Typography.Heading>
 
       <Typography.Subheading as="h2">
