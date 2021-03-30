@@ -15,4 +15,8 @@ export const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+  button {
+    cursor: pointer;
+    font-family: Work Sans, sans-serif;
+  }
 `;

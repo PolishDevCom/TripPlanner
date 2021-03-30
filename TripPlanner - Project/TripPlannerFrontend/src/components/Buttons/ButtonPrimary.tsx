@@ -1,35 +1,30 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
-const ButtonPrimary = styled.button`
+export const ButtonPrimary = styled.button`
   padding: 10px 18px 10px 18px;
   width: 105px;
   height: 34px;
-  background-color: #F53314;
+  background-color: #f53314;
   border: 0;
   border-radius: 6px;
   color: #fff;
-  cursor: pointer;
-  left: calc(50% - 105px/2);
-  top: calc(50% - 34px/2 + 54px);
-  font-family: Work Sans, sans-serif;
-  font-style: normal;
+  font-style: normal;s
   font-weight: 500;
   font-size: 12px;
   line-height: 14px;
-  
+
   &:hover {
-    background: #F75D45;
+    background: #f75d45;
   }
   &:disabled {
-    background: #D1D1D1;
-    color: #ADADAD;
+    background: #d1d1d1;
+    color: #adadad;
   }
   &:active {
-    background: #F98876;
+    background: #f98876;
   }
   &:focus {
-    border: 2px solid #FBB2A7;
+    border: 2px solid #fbb2a7;
     padding: 0;
   }
-`
-export default ButtonPrimary;
+`;

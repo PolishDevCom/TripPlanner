@@ -8,9 +8,9 @@ import {
 import { useInterval } from '../hooks/useInterval';
 import { DefaultLayout } from '../components/Layout/DefaultLayout';
 import { Typography } from '../components/Typography/Typography';
-import ButtonPrimary from '../components/Buttons/ButtonPrimary';
-import ButtonText from '../components/Buttons/ButtonPrimaryText';
-import ButtonLink from '../components/Buttons/ButtonPrimaryLink';
+import {ButtonPrimary} from '../components/Buttons/ButtonPrimary';
+import {ButtonText} from '../components/Buttons/ButtonPrimaryText';
+import {ButtonLink} from '../components/Buttons/ButtonPrimaryLink';
 
 export const Home = () => {
   const dispatch = useAppDispatch();
