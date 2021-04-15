@@ -2,6 +2,8 @@ import json
 
 import requests
 
+from .utils import get_api_key
+
 
 class RouteApiRequest:
     def __init__(
@@ -12,18 +14,11 @@ class RouteApiRequest:
         self.longitude_end = longitude_end
         self.latitude_end = latitude_end
 
-        self.api_key = self.obtain_api_key()
+        self.api_key = get_api_key("ROUTE_API_KEY")
         self.api_key_valid = bool(self.api_key)
 
         self.reply = self.request_external_api()
         self.reply_valid = self.is_reply_success()
-
-    def obtain_api_key(self):
-        try:
-            with open("api_keys.json") as api_keys:
-                return json.loads(api_keys.read()).get("ROUTE_API_KEY")
-        except:
-            return False
 
     def request_external_api(self):
         if self.api_key_valid:

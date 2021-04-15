@@ -2,36 +2,51 @@ import json
 
 import requests
 
-
-class Secrets:
-    @classmethod
-    def obtain_api_key(self):
-        with open("api_keys.json") as api_keys:
-            return json.loads(api_keys.read()).get("PLACES_API_KEY")
-
-    @classmethod
-    def obtain_secret(self):
-        with open("secret.json") as secret:
-            return json.loads(secret.read()).get("SECRET_KEY_PLACES")
+from .utils import get_api_key, get_secret_key
 
 
 class PlacesApiRequest:
+    """
+    Class for handling API requests from the Foursquare database.
+
+    Args:
+        longitude (float): The longitude of the desired location.
+        latitude (float): The latitude of the desired location.
+        radius (int): The maximum distance of a venue from the desired location.
+        limit (int): Limit of the results returned.
+        query (str): Query about the types of venues.
+
+    Attributes:
+        longitude (float): The longitude of the desired location.
+        latitude (float): The latitude of the desired location.
+        radius (int): The maximum distance of a venue from the desired location.
+        limit (int): Limit of the results returned.
+        query (str): Query about the types of venues.
+        response (list): Response given by Foursquare API.
+        venues (list): List of venues returned by API.
+    """
+
     def __init__(self, longitude, latitude, radius, limit, query):
         self.longitude = longitude
         self.latitude = latitude
         self.radius = radius
         self.limit = limit
         self.query = query
-        self.api_key = Secrets.obtain_api_key()
-        self.secret = Secrets.obtain_secret()
         self.response = self.make_request()
-        self.venues_list = self.make_venue_list()
+        self.venues = self.get_venues()
 
-    def make_request(self):
+    def make_request(self) -> dict:
+        """
+        Function that sends requests to the API.
+
+        Returns:
+            dict: Briefer API response.
+
+        """
         url = "https://api.foursquare.com/v2/venues/explore"
         params = dict(
-            client_id=f"{self.api_key}",
-            client_secret=f"{self.secret}",
+            client_id=get_api_key("FOURSQUARE_API_KEY"),
+            client_secret=get_secret_key("FOURSQUARE_API_SECRET"),
             v="20210303",
             ll=f"{self.longitude},{self.latitude}",
             radius=self.radius,
@@ -41,31 +56,28 @@ class PlacesApiRequest:
         resp = requests.get(url=url, params=params)
         items = json.loads(resp.text)
         self.limit = len(items["response"]["groups"][0]["items"])
-        return items["response"]
+        items = items["response"]["groups"][0]["items"]
+        return items
 
-    def make_venue_list(self):
-        venues_list = []
-        for i in range(self.limit):
+    def get_venues(self) -> list:
+        """
+        Method for selecting information about venues and saving
+        them to a list variable.
+
+        Returns:
+            list: List of objects with desired information.
+
+        """
+        venues = []
+        for index, el in enumerate(self.response):
             item = {
-                "name": self.response["groups"][0]["items"][i]["venue"][
-                    "name"
-                ],
-                "categories": self.response["groups"][0]["items"][i]["venue"][
-                    "categories"
-                ][0]["name"],
-                "address": self.response["groups"][0]["items"][i]["venue"][
-                    "location"
-                ]["formattedAddress"],
-                "latitude": self.response["groups"][0]["items"][i]["venue"][
-                    "location"
-                ]["lat"],
-                "longitude": self.response["groups"][0]["items"][i]["venue"][
-                    "location"
-                ]["lng"],
-                "distance": self.response["groups"][0]["items"][i]["venue"][
-                    "location"
-                ]["distance"],
-                "id": self.response["groups"][0]["items"][i]["venue"]["id"],
+                "name": el["venue"]["name"],
+                "categories": el["venue"]["categories"][0]["name"],
+                "address": el["venue"]["location"]["formattedAddress"],
+                "latitude": el["venue"]["location"]["lat"],
+                "longitude": el["venue"]["location"]["lng"],
+                "distance": el["venue"]["location"]["distance"],
+                "id": el["venue"]["id"],
             }
-            venues_list.append(item)
-        return venues_list
+            venues.append(item)
+        return venues

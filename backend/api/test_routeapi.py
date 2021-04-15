@@ -256,7 +256,7 @@ def test2_get_distance():
 
 def test1_obtain_api_key():
     try:
-        with open("api_keys.json") as api_keys:
+        with open(r"api\secrets\api_keys.json") as api_keys:
             assert good_object.api_key == json.loads(api_keys.read()).get(
                 "ROUTE_API_KEY"
             )
