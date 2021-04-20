@@ -1,5 +1,7 @@
+"""Stores serializers."""
+
 from api.models import Places, Route
-from api.placeapi import PlacesApiRequest
+from api.placeapi import PlacesApi
 from api.routeapi import RouteApiRequest
 from rest_framework import serializers
 
@@ -55,7 +57,11 @@ class RouteSerializer(serializers.ModelSerializer):
 
 
 class PlacesSerializer(serializers.ModelSerializer):
+    """ Serializer for Places object."""
+
     class Meta:
+        """Serializer based on Places model."""
+
         model = Places
         fields = [
             "latitude",
@@ -67,24 +73,30 @@ class PlacesSerializer(serializers.ModelSerializer):
         ]
         extra_kwargs = {"venues": {"read_only": True}}
 
-    def create(self, validated_data):
+    def create(self, validated_data: dict) -> object:
+        """
+        Creates Places object.
+
+        Returns:
+            object: Places object
+        """
         if not self.is_valid():
             return None
-        api_request = PlacesApiRequest(
+        api_request = PlacesApi(
             self.validated_data["latitude"],
             self.validated_data["longitude"],
             self.validated_data["radius"],
             self.validated_data["limit"],
             self.validated_data["query"],
         )
-        venues = api_request.venues_list
+        api_request.get_venues()
         places = Places(
             latitude=self.validated_data["latitude"],
             longitude=self.validated_data["longitude"],
             radius=self.validated_data["radius"],
             query=self.validated_data["query"],
             limit=self.validated_data["limit"],
-            venues=venues,
+            venues=api_request.venues,
         )
         places.save()
         return places
