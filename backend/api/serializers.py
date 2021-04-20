@@ -68,7 +68,6 @@ class PlacesSerializer(serializers.ModelSerializer):
             "longitude",
             "radius",
             "query",
-            "limit",
             "venues",
         ]
         extra_kwargs = {"venues": {"read_only": True}}
@@ -76,6 +75,9 @@ class PlacesSerializer(serializers.ModelSerializer):
     def create(self, validated_data: dict) -> object:
         """
         Creates Places object.
+
+        Args:
+            validated_data (dict): Places object data.
 
         Returns:
             object: Places object
@@ -86,16 +88,15 @@ class PlacesSerializer(serializers.ModelSerializer):
             self.validated_data["latitude"],
             self.validated_data["longitude"],
             self.validated_data["radius"],
-            self.validated_data["limit"],
             self.validated_data["query"],
         )
-        venues = api_request.get_venues()
+        response = api_request.make_request()
+        venues = api_request.get_venues(response)
         places = Places(
             latitude=self.validated_data["latitude"],
             longitude=self.validated_data["longitude"],
             radius=self.validated_data["radius"],
             query=self.validated_data["query"],
-            limit=self.validated_data["limit"],
             venues=venues,
         )
         places.save()

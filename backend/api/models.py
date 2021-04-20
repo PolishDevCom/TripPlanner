@@ -26,7 +26,6 @@ class Places(models.Model):
         longitude (float): The longitude of the location.
         latitude (float): The latitude of the location.
         radius (int): The maximum distance of a venue from the location.
-        limit (int): Limit of the venues returned.
         query (str): Query about the types of venues.
         venues (list): List of detailed venues.
     """
@@ -34,6 +33,5 @@ class Places(models.Model):
     longitude = models.DecimalField(decimal_places=9, max_digits=12)
     latitude = models.DecimalField(decimal_places=9, max_digits=12)
     radius = models.IntegerField()
-    query = models.CharField(max_length=36)
-    limit = models.IntegerField()
+    query = models.CharField(max_length=56)
     venues = ArrayField(JSONField())

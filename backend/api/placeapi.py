@@ -15,7 +15,6 @@ class PlacesApi:
         longitude (float): The longitude of the location.
         latitude (float): The latitude of the location.
         radius (int): The maximum distance of a venue from the location.
-        limit (int): Total of the results returned.
         query (str): Query about the types of venues.
     """
 
@@ -24,23 +23,27 @@ class PlacesApi:
         longitude: float,
         latitude: float,
         radius: int,
-        limit: int,
         query: str,
     ) -> None:
         """Initializes PlacesApi object."""
         self.longitude = longitude
         self.latitude = latitude
         self.radius = radius
-        self.limit = limit
         self.query = query
 
-    def get_venues(self) -> list:
-        """Returns list of venues"""
-        response = self.make_request()
-        self.limit = len(response)
+    def get_venues(self, response: list) -> list:
+        """
+        Returns list of venues
+
+        Args:
+            response (list): Response from the API.
+
+        Returns:
+            list: Detailed venues list.
+        """
         venues = []
         for index, el in enumerate(response):
-            item = {
+            venue = {
                 "name": el["venue"]["name"],
                 "categories": el["venue"]["categories"][0]["name"],
                 "address": el["venue"]["location"]["formattedAddress"],
@@ -49,7 +52,7 @@ class PlacesApi:
                 "distance": el["venue"]["location"]["distance"],
                 "id": el["venue"]["id"],
             }
-            venues.append(item)
+            venues.append(venue)
         return venues
 
     def make_request(self) -> list:
@@ -57,7 +60,7 @@ class PlacesApi:
         Sends requests to the API and returns response.
 
         Returns:
-            list: API response
+            list: API response.
         """
         url = "https://api.foursquare.com/v2/venues/explore"
         params = dict(
@@ -67,7 +70,7 @@ class PlacesApi:
             ll=f"{self.longitude},{self.latitude}",
             radius=self.radius,
             query=f"{self.query}",
-            limit=self.limit,
+            limit=3,
         )
         resp = requests.get(url=url, params=params)
         items = json.loads(resp.text)
