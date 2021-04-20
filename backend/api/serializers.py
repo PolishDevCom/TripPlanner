@@ -89,14 +89,14 @@ class PlacesSerializer(serializers.ModelSerializer):
             self.validated_data["limit"],
             self.validated_data["query"],
         )
-        api_request.get_venues()
+        venues = api_request.get_venues()
         places = Places(
             latitude=self.validated_data["latitude"],
             longitude=self.validated_data["longitude"],
             radius=self.validated_data["radius"],
             query=self.validated_data["query"],
             limit=self.validated_data["limit"],
-            venues=api_request.venues,
+            venues=venues,
         )
         places.save()
         return places
