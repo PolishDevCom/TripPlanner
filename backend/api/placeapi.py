@@ -17,7 +17,6 @@ class PlacesApi:
         radius (int): The maximum distance of a venue from the location.
         limit (int): Total of the results returned.
         query (str): Query about the types of venues.
-        venues (list): List of venues returned by API.
     """
 
     def __init__(
@@ -34,10 +33,9 @@ class PlacesApi:
         self.radius = radius
         self.limit = limit
         self.query = query
-        self.venues = None
 
-    def get_venues(self):
-        """Sets list of venues"""
+    def get_venues(self) -> list:
+        """Returns list of venues"""
         response = self.make_request()
         self.limit = len(response)
         venues = []
@@ -52,7 +50,7 @@ class PlacesApi:
                 "id": el["venue"]["id"],
             }
             venues.append(item)
-        self.venues = venues
+        return venues
 
     def make_request(self) -> list:
         """
