@@ -41,9 +41,8 @@ class PlacesApi:
         Returns:
             list: Detailed venues list.
         """
-        venues = []
-        for index, el in enumerate(response):
-            venue = {
+        return [
+            {
                 "name": el["venue"]["name"],
                 "categories": el["venue"]["categories"][0]["name"],
                 "address": el["venue"]["location"]["formattedAddress"],
@@ -52,8 +51,8 @@ class PlacesApi:
                 "distance": el["venue"]["location"]["distance"],
                 "id": el["venue"]["id"],
             }
-            venues.append(venue)
-        return venues
+            for el in (response)
+        ]
 
     def make_request(self) -> list:
         """
@@ -70,7 +69,6 @@ class PlacesApi:
             ll=f"{self.longitude},{self.latitude}",
             radius=self.radius,
             query=f"{self.query}",
-            limit=3,
         )
         resp = requests.get(url=url, params=params)
         items = json.loads(resp.text)

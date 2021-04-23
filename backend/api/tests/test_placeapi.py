@@ -45,7 +45,6 @@ successful_response = [
                     "icon": {
                         "suffix": ".png",
                     },
-                    # "primary": true
                 }
             ],
             "photos": {"count": 0, "groups": []},
@@ -90,7 +89,6 @@ successful_response = [
                     "icon": {
                         "suffix": ".png",
                     },
-                    # "primary": true
                 }
             ],
             "photos": {"count": 0, "groups": []},
@@ -133,7 +131,6 @@ successful_response = [
                     "icon": {
                         "suffix": ".png",
                     },
-                    # "primary": true
                 }
             ],
             "photos": {"count": 0, "groups": []},
