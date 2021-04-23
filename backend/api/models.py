@@ -1,3 +1,7 @@
+"""Stores models"""
+
+from django.contrib.postgres.fields import ArrayField
+from django.contrib.postgres.fields.jsonb import JSONField
 from django.db import models
 
 
@@ -12,3 +16,22 @@ class Route(models.Model):
     coordinates_json = models.TextField()
 
     created_at = models.DateTimeField(auto_now_add=True)
+
+
+class Places(models.Model):
+    """
+    Represents location with queried venues.
+
+    Attributes:
+        longitude (float): The longitude of the location.
+        latitude (float): The latitude of the location.
+        radius (int): The maximum distance of a venue from the location.
+        query (str): Query about the types of venues.
+        venues (list): List of detailed venues.
+    """
+
+    longitude = models.DecimalField(decimal_places=9, max_digits=12)
+    latitude = models.DecimalField(decimal_places=9, max_digits=12)
+    radius = models.IntegerField()
+    query = models.CharField(max_length=56)
+    venues = ArrayField(JSONField())

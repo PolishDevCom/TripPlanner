@@ -1,6 +1,8 @@
-from api.models import Route
+"""Stores serializers."""
+
+from api.models import Places, Route
+from api.placeapi import PlacesApi
 from api.routeapi import RouteApiRequest
-from django.contrib.auth.models import User
 from rest_framework import serializers
 
 
@@ -52,3 +54,50 @@ class RouteSerializer(serializers.ModelSerializer):
 
             else:
                 return False
+
+
+class PlacesSerializer(serializers.ModelSerializer):
+    """ Serializer for Places object."""
+
+    class Meta:
+        """Serializer based on Places model."""
+
+        model = Places
+        fields = [
+            "latitude",
+            "longitude",
+            "radius",
+            "query",
+            "venues",
+        ]
+        extra_kwargs = {"venues": {"read_only": True}}
+
+    def create(self, validated_data: dict) -> object:
+        """
+        Creates Places object.
+
+        Args:
+            validated_data (dict): Places object data.
+
+        Returns:
+            object: Places object
+        """
+        if not self.is_valid():
+            return None
+        api_request = PlacesApi(
+            self.validated_data["latitude"],
+            self.validated_data["longitude"],
+            self.validated_data["radius"],
+            self.validated_data["query"],
+        )
+        response = api_request.make_request()
+        venues = api_request.get_venues(response)
+        places = Places(
+            latitude=self.validated_data["latitude"],
+            longitude=self.validated_data["longitude"],
+            radius=self.validated_data["radius"],
+            query=self.validated_data["query"],
+            venues=venues,
+        )
+        places.save()
+        return places

@@ -4,7 +4,7 @@ from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
 router.register(r"routes", views.RouteViewSet, basename="routes")
-
+router.register(r"places", views.PlacesViewSet, basename="places")
 
 app_name = "api"
 
