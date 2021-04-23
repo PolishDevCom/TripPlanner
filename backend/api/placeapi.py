@@ -51,7 +51,7 @@ class PlacesApi:
                 "distance": el["venue"]["location"]["distance"],
                 "id": el["venue"]["id"],
             }
-            for el in (response)
+            for el in response
         ]
 
     def make_request(self) -> list:
