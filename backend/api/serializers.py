@@ -1,8 +1,9 @@
 """Stores serializers."""
 
-from api.models import Places, Route
+from api.models import Places, Route, Venue
 from api.placeapi import PlacesApi
 from api.routeapi import RouteApiRequest
+from api.venueapi import VenueApi
 from rest_framework import serializers
 
 
@@ -101,3 +102,64 @@ class PlacesSerializer(serializers.ModelSerializer):
         )
         places.save()
         return places
+
+
+class VenueSerializer(serializers.ModelSerializer):
+    """ Serializer for Veune object."""
+
+    class Meta:
+        """Serializer based on Venue model."""
+
+        model = Venue
+        fields = [
+            "venue_id",
+            "name",
+            "categories",
+            "photo",
+            "address",
+            "longitude",
+            "latitude",
+            "similar_venues",
+        ]
+        extra_kwargs = {
+            "name": {"read_only": True},
+            "categories": {"read_only": True},
+            "address": {"read_only": True},
+            "photo": {"read_only": True},
+            "longitude": {"read_only": True},
+            "latitude": {"read_only": True},
+            "similar_venues": {"read_only": True},
+        }
+
+    def create(self, validated_data: dict) -> object:
+        """
+        Creates Venue object.
+
+        Args:
+            validated_data (dict): Validated venue object data.
+
+        Returns:
+            object: Venue object
+        """
+        if not self.is_valid():
+            return None
+        api_request = VenueApi(self.validated_data["venue_id"])
+        details_response = api_request.make_request()
+        details = api_request.get_details(details_response)
+        similar_response = api_request.make_request_similar()
+        similar_venues = api_request.get_similar_venues(similar_response)
+        venue = Venue(
+            venue_id=self.validated_data["venue_id"],
+            name=details["name"],
+            categories=details["categories"],
+            address=details["address"],
+            longitude=details["longitude"],
+            latitude=details["latitude"],
+            similar_venues=similar_venues,
+        )
+        try:
+            venue.photo = details["photo"]
+        except:
+            pass
+        venue.save()
+        return venue

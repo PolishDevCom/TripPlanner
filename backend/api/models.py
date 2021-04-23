@@ -35,3 +35,28 @@ class Places(models.Model):
     radius = models.IntegerField()
     query = models.CharField(max_length=56)
     venues = ArrayField(JSONField())
+
+
+class Venue(models.Model):
+    """
+    Represents detailed venue.
+
+    Attributes:
+        venue_id (str): Venue's id.
+        name (str): Venue's name.
+        address (list): Venue'a address.
+        logitude (float): Venue's longitude.
+        latitude (float): Venue's latitude.
+        photo (str): Venue's photo.
+        categories (list): Venue's categories.
+        similar_venues (list): List of similar detailed venues.
+    """
+
+    venue_id = models.CharField(max_length=24, unique=True)
+    name = models.CharField(max_length=64)
+    address = models.TextField()
+    longitude = models.DecimalField(decimal_places=9, max_digits=12)
+    latitude = models.DecimalField(decimal_places=9, max_digits=12)
+    photo = models.TextField(null=True, blank=True)
+    categories = models.TextField()
+    similar_venues = ArrayField(JSONField(), null=True, blank=True)

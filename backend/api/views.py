@@ -1,7 +1,7 @@
 """Stores ViewSets."""
 
-from api.models import Places, Route
-from api.serializers import PlacesSerializer, RouteSerializer
+from api.models import Places, Route, Venue
+from api.serializers import PlacesSerializer, RouteSerializer, VenueSerializer
 from rest_framework import viewsets
 
 
@@ -15,3 +15,10 @@ class PlacesViewSet(viewsets.ModelViewSet):
 
     queryset = Places.objects.all()
     serializer_class = PlacesSerializer
+
+
+class VenueViewSet(viewsets.ModelViewSet):
+    """ViewSet for class Venue."""
+
+    queryset = Venue.objects.all()
+    serializer_class = VenueSerializer
