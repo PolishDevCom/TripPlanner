@@ -139,7 +139,7 @@ class VenueSerializer(serializers.ModelSerializer):
             "latitude": {"read_only": True},
         }
 
-    def create(self, validated_data: dict) -> object:
+    def create(self, validated_data: dict) -> Venue:
         """
         Creates Venue object.
 
