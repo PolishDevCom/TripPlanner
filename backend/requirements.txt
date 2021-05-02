@@ -4,3 +4,4 @@ Django==3.0.8
 whitenoise==5.1.0
 psycopg2==2.8.6
 pre-commit==2.11.1
+pytest==6.2.2
