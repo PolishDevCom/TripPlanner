@@ -8,7 +8,11 @@ from rest_framework import serializers
 
 
 class RouteSerializer(serializers.ModelSerializer):
+    """ Serializer for Route object."""
+
     class Meta:
+        """Serializer based on Venue model."""
+
         model = Route
         fields = [
             "id",
@@ -27,7 +31,15 @@ class RouteSerializer(serializers.ModelSerializer):
         }
 
     def create(self, validated_data):
+        """
+        Creates Route object.
 
+        Args:
+            validated_data (dict): Validated route object data.
+
+        Returns:
+            object: Route object or None
+        """
         if self.is_valid():
             api_request = RouteApiRequest(
                 self.validated_data["longitude_start"],
@@ -42,10 +54,10 @@ class RouteSerializer(serializers.ModelSerializer):
                     latitude_start=self.validated_data["latitude_start"],
                     longitude_end=self.validated_data["longitude_end"],
                     latitude_end=self.validated_data["latitude_end"],
-                    distance=RouteApiRequest.give_distance(
+                    distance=RouteApiRequest.get_distance(
                         api_request.reply, api_request.reply_valid
                     ),
-                    coordinates_json=RouteApiRequest.give_coordinates(
+                    coordinates_json=RouteApiRequest.get_coordinates(
                         api_request.reply, api_request.reply_valid
                     ),
                 )
@@ -105,7 +117,7 @@ class PlacesSerializer(serializers.ModelSerializer):
 
 
 class VenueSerializer(serializers.ModelSerializer):
-    """ Serializer for Veune object."""
+    """ Serializer for Venue object."""
 
     class Meta:
         """Serializer based on Venue model."""
@@ -115,20 +127,16 @@ class VenueSerializer(serializers.ModelSerializer):
             "venue_id",
             "name",
             "categories",
-            "photo",
             "address",
             "longitude",
             "latitude",
-            "similar_venues",
         ]
         extra_kwargs = {
             "name": {"read_only": True},
             "categories": {"read_only": True},
             "address": {"read_only": True},
-            "photo": {"read_only": True},
             "longitude": {"read_only": True},
             "latitude": {"read_only": True},
-            "similar_venues": {"read_only": True},
         }
 
     def create(self, validated_data: dict) -> object:
@@ -139,15 +147,13 @@ class VenueSerializer(serializers.ModelSerializer):
             validated_data (dict): Validated venue object data.
 
         Returns:
-            object: Venue object
+            object: Venue object or None
         """
         if not self.is_valid():
             return None
         api_request = VenueApi(self.validated_data["venue_id"])
         details_response = api_request.make_request()
         details = api_request.get_details(details_response)
-        similar_response = api_request.make_request_similar()
-        similar_venues = api_request.get_similar_venues(similar_response)
         venue = Venue(
             venue_id=self.validated_data["venue_id"],
             name=details["name"],
@@ -155,11 +161,6 @@ class VenueSerializer(serializers.ModelSerializer):
             address=details["address"],
             longitude=details["longitude"],
             latitude=details["latitude"],
-            similar_venues=similar_venues,
         )
-        try:
-            venue.photo = details["photo"]
-        except:
-            pass
         venue.save()
         return venue

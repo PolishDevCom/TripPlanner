@@ -8,28 +8,24 @@ def test_get_details():
     test_venue = VenueApi("4c55b289f5f3d13ad7f539fc")
 
     result = test_venue.get_details(succesfull_venue_response)
-
-    assert isinstance(result["name"], str)
-    assert isinstance(result["address"], list)
-    assert isinstance(result["latitude"], float)
-    assert isinstance(result["longitude"], float)
-    assert isinstance(result["categories"], list)
-    assert isinstance(result["photo"], str)
-    assert isinstance(result["attributes"], list)
+    assert result == succesfull_venue_details
 
 
-def test_get_similar_venues():
-    """Tests get_similar_venues()"""
-    test_venue = VenueApi("4c55b289f5f3d13ad7f539fc")
-
-    result = test_venue.get_similar_venues(succesfull_similar_venues)
-    assert isinstance(result[0]["id"], str)
-    assert isinstance(result[0]["name"], str)
-    assert isinstance(result[0]["address"], list)
-    assert isinstance(result[0]["latitude"], float)
-    assert isinstance(result[0]["longitude"], float)
-    assert isinstance(result[0]["category"], str)
-
+succesfull_venue_details = {
+    "name": "Kino Pod Baranami",
+    "address": ["Rynek Główny 27", "31-010 Kraków", "Polska"],
+    "latitude": 50.061604,
+    "longitude": 19.935257,
+    "categories": ["Indie Movie Theater"],
+    "contact": {
+        "phone": "+48124230768",
+        "formattedPhone": "+48 12 423 07 68",
+        "twitter": "kinopodbaranami",
+        "facebook": "29546594493",
+        "facebookUsername": "kinopodbaranami",
+        "facebookName": "Kino Pod Baranami",
+    },
+}
 
 succesfull_venue_response = {
     "id": "4c55b289f5f3d13ad7f539fc",
@@ -420,129 +416,3 @@ succesfull_venue_response = {
         "algoVersion": 3,
     },
 }
-
-succesfull_similar_venues = [
-    {
-        "id": "4f3a9ddfe4b059425acebb2a",
-        "name": "Kinokawiarnia KiKa",
-        "location": {
-            "address": "Ignacego Krasickiego, 31-000 Kraków",
-            "lat": 50.0418,
-            "lng": 19.940666,
-            "labeledLatLngs": [
-                {"label": "display", "lat": 50.0418, "lng": 19.940666}
-            ],
-            "cc": "PL",
-            "city": "Kraków",
-            "state": "Województwo małopolskie",
-            "country": "Polska",
-            "formattedAddress": [
-                "Ignacego Krasickiego, 31-000 Kraków",
-                "Kraków",
-                "Polska",
-            ],
-        },
-        "categories": [
-            {
-                "id": "4bf58dd8d48988d17e941735",
-                "name": "Indie Movie Theater",
-                "pluralName": "Indie Movie Theaters",
-                "shortName": "Indie Movies",
-                "icon": {
-                    "suffix": ".png",
-                },
-            }
-        ],
-    },
-    {
-        "id": "4bc01f14abf495217cecbe93",
-        "name": "Cinema City",
-        "location": {
-            "address": "Podgórska 34",
-            "crossStreet": "Galeria Kazimierz",
-            "lat": 50.053875,
-            "lng": 19.954483,
-            "labeledLatLngs": [
-                {"label": "display", "lat": 50.053875, "lng": 19.954483}
-            ],
-            "postalCode": "31-536",
-            "cc": "PL",
-            "city": "Kraków",
-            "state": "Województwo małopolskie",
-            "country": "Polska",
-            "formattedAddress": [
-                "Podgórska 34 (Galeria Kazimierz)",
-                "31-536 Kraków",
-                "Polska",
-            ],
-        },
-        "categories": [
-            {
-                "id": "4bf58dd8d48988d17f941735",
-                "name": "Movie Theater",
-                "pluralName": "Movie Theaters",
-                "shortName": "Movie Theater",
-                "icon": {
-                    "suffix": ".png",
-                },
-            }
-        ],
-    },
-    {
-        "id": "4be5961abcef2d7ff1f803e5",
-        "name": "Kino Mikro",
-        "location": {
-            "address": "Lea 5",
-            "lat": 50.069458,
-            "lng": 19.923832,
-            "labeledLatLngs": [
-                {"label": "display", "lat": 50.069458, "lng": 19.923832}
-            ],
-            "postalCode": "30-046",
-            "cc": "PL",
-            "city": "Kraków",
-            "state": "Województwo małopolskie",
-            "country": "Polska",
-            "formattedAddress": ["Lea 5", "30-046 Kraków", "Polska"],
-        },
-        "categories": [
-            {
-                "id": "4bf58dd8d48988d17f941735",
-                "name": "Movie Theater",
-                "pluralName": "Movie Theaters",
-                "shortName": "Movie Theater",
-                "icon": {
-                    "suffix": ".png",
-                },
-            }
-        ],
-    },
-    {
-        "id": "4be19a607cb6d13a7f24be2d",
-        "name": "KIJÓW.CENTRUM",
-        "location": {
-            "address": "Krasińskiego 34",
-            "lat": 50.05852,
-            "lng": 19.925306,
-            "labeledLatLngs": [
-                {"label": "display", "lat": 50.05852, "lng": 19.925306}
-            ],
-            "cc": "PL",
-            "city": "Kraków",
-            "state": "Województwo małopolskie",
-            "country": "Polska",
-            "formattedAddress": ["Krasińskiego 34", "Kraków", "Polska"],
-        },
-        "categories": [
-            {
-                "id": "4bf58dd8d48988d17f941735",
-                "name": "Movie Theater",
-                "pluralName": "Movie Theaters",
-                "shortName": "Movie Theater",
-                "icon": {
-                    "suffix": ".png",
-                },
-            }
-        ],
-    },
-]

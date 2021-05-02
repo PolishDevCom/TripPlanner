@@ -6,6 +6,20 @@ from django.db import models
 
 
 class Route(models.Model):
+    """
+    Represents route with list of coordinantes.
+
+    Attributes:
+        id (int): Route identifier.
+        longitude_start (float): Start route's longitude.
+        latitude_start (float): Start route's latitude.
+        longitude_end (float): End route's longitude.
+        latitude_end (float): End route's latitude.
+        distance (float): Route's distance.
+        coordinates_json (str): List of coordinates of the route.
+        created_at (datetime): Date and time of creation.
+    """
+
     id = models.AutoField(primary_key=True)
     longitude_start = models.DecimalField(decimal_places=9, max_digits=12)
     latitude_start = models.DecimalField(decimal_places=9, max_digits=12)
@@ -47,9 +61,7 @@ class Venue(models.Model):
         address (list): Venue'a address.
         logitude (float): Venue's longitude.
         latitude (float): Venue's latitude.
-        photo (str): Venue's photo.
         categories (list): Venue's categories.
-        similar_venues (list): List of similar detailed venues.
     """
 
     venue_id = models.CharField(max_length=24, unique=True)
@@ -57,6 +69,4 @@ class Venue(models.Model):
     address = models.TextField()
     longitude = models.DecimalField(decimal_places=9, max_digits=12)
     latitude = models.DecimalField(decimal_places=9, max_digits=12)
-    photo = models.TextField(null=True, blank=True)
     categories = models.TextField()
-    similar_venues = ArrayField(JSONField(), null=True, blank=True)
