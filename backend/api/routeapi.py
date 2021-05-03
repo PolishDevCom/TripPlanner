@@ -2,7 +2,7 @@ import json
 
 import requests
 
-from .utils import get_api_key
+from .utils import get_key
 
 
 class RouteApiRequest:
@@ -14,7 +14,7 @@ class RouteApiRequest:
         self.longitude_end = longitude_end
         self.latitude_end = latitude_end
 
-        self.api_key = get_api_key("ROUTE_API_KEY")
+        self.api_key = get_key("ROUTE_API_KEY")
         self.api_key_valid = bool(self.api_key)
 
         self.reply = self.request_external_api()

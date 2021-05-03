@@ -1,1 +1,1 @@
-"""Tests"""
+"""Tests for account's app."""

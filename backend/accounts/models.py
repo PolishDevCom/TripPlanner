@@ -1,1 +1,1 @@
-"""Models"""
+"""Models for the accounts application."""

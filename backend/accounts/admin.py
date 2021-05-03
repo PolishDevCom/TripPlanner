@@ -1,1 +1,1 @@
-"""Admin"""
+"""Account's admin module."""

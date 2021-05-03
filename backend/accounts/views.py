@@ -1,1 +1,1 @@
-"""Views"""
+"""Account's view module."""

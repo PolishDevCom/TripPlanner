@@ -1,4 +1,5 @@
-"""Urls"""
+"""Account's module urls"""
+
 from allauth.account.views import ConfirmEmailView, EmailVerificationSentView
 from dj_rest_auth.views import PasswordResetConfirmView, PasswordResetView
 from django.urls import include, path
