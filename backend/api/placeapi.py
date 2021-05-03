@@ -1,10 +1,12 @@
 """Gets information from Foursquare API."""
 
 import json
+import os
 
+import dotenv
 import requests
 
-from .utils import get_key
+dotenv.load_dotenv()
 
 
 class PlacesApi:
@@ -63,8 +65,8 @@ class PlacesApi:
         """
         url = "https://api.foursquare.com/v2/venues/explore"
         params = dict(
-            client_id=get_key("FOURSQUARE_API_KEY"),
-            client_secret=get_key("FOURSQUARE_API_SECRET"),
+            client_id=os.getenv("FOURSQUARE_API_KEY"),
+            client_secret=os.getenv("FOURSQUARE_API_SECRET"),
             v="20210303",
             ll=f"{self.longitude},{self.latitude}",
             radius=self.radius,
