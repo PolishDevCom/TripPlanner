@@ -1,10 +1,9 @@
 """Gets Venue information from Foursquare API."""
 
 import json
+import os
 
 import requests
-
-from .utils import get_api_key, get_secret_key
 
 
 class VenueApi:
@@ -49,8 +48,8 @@ class VenueApi:
         Returns:
             dict: API response
         """
-        client_id = get_api_key("FOURSQUARE_API_KEY")
-        client_secret = get_secret_key("FOURSQUARE_API_SECRET")
+        client_id = os.getenv("FOURSQUARE_API_KEY")
+        client_secret = os.getenv("FOURSQUARE_API_SECRET")
         url = (
             f"https://api.foursquare.com/v2/venues/{self.venue_id}?"
             f"client_id={client_id}&client_secret={client_secret}&v=20210303"

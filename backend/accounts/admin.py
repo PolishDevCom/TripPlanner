@@ -1,0 +1,1 @@
+"""Account's admin module."""
